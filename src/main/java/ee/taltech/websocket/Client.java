@@ -26,7 +26,7 @@ public class Client extends WebSocketClient {
 
     @Override
     public void onOpen(ServerHandshake handshake) {
-        Message message = new Message(user, "Hello, my name is " + user.getName());
+        Message message = new Message(user, String.format("Hello, my name is %s!", user.getName()));
         send(serializer.encode(message));
         System.out.println("New connection opened.");
     }
@@ -66,7 +66,7 @@ public class Client extends WebSocketClient {
         Serializer<Message> serializer = new Serializer<>(Message.class);
 
         while (true) {
-            System.out.println("\nEnter a message: ");
+            System.out.println("\n[ENTER NEW MESSAGE]");
             String text = keyboard.nextLine();
             Message message = new Message(user, text);
             client.send(serializer.encode(message));

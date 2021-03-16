@@ -19,11 +19,11 @@ public class Server extends WebSocketServer {
 
     @Override
     public void onOpen(WebSocket conn, ClientHandshake handshake) {
-        Message message = new Message(serverUser, "Welcome to the server!");
-        conn.send(serializer.encode(message)); //This method sends a message to the new client
+        Message privateMessage = new Message(serverUser, "Welcome to the server!");
+        conn.send(serializer.encode(privateMessage)); //This method sends a message to the new client
 
-        message = new Message(serverUser, "New connection: " + conn.getRemoteSocketAddress());
-        broadcast(serializer.encode(message)); //This method sends a message to all clients connected
+        Message broadcastMessage = new Message(serverUser, "New connection: " + conn.getRemoteSocketAddress());
+        broadcast(serializer.encode(broadcastMessage)); //This method sends a message to all clients connected
         System.out.println("New connection to " + conn.getRemoteSocketAddress());
     }
 
